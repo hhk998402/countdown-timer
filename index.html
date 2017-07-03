@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+<link rel="stylesheet" type="text/css" href="./jquery.datetimepicker.css"/>
+<link rel="stylesheet" type="text/css" href="./styles.css"/>
+<style type="text/css">
+
+.custom-date-style {
+	background-color: red !important;
+}
+
+.input{
+}
+.input-wide{
+	width: 500px;
+}
+
+</style>
+</head>
+<body>
+	<h2>DateTimePicker</h3>
+	<input type="text" value="Click Here" id="datetimepicker"/><br><br>
+    <h2 id="demoprev"></h2>
+    <h2 id="demo"></h2>
+</body>
+<script src="./jquery.js"></script>
+<script src="build/jquery.datetimepicker.full.js"></script>
+<script>/*
+window.onerror = function(errorMsg) {
+	$('#console').html($('#console').html()+'<br>'+errorMsg)
+}*/
+
+$.datetimepicker.setLocale('en');
+
+$( "#datetimepicker" ).datetimepicker({
+            changeYear:true,
+            dateFormat:"dd-mm-yy"
+            });
+
+</script>
+
+<script>
+// Set the date we're counting down to
+//var countDownDate = new Date("Jan 5, 2018 15:37:25").getTime();
+//alert("Here");
+$( document ).ready(function() {
+    var countDownDate;
+    function setup()
+    {
+        var x = setInterval(function() {
+    //alert("ewfwg");
+
+  // Get todays date and time
+  var now = new Date().getTime();
+
+  // Find the distance between now an the count down date
+  var distance = countDownDate - now;
+
+  // Time calculations for days, hours, minutes and seconds
+  var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+  var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+  var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+  // Display the result in the element with id="demo"
+  document.getElementById("demo").innerHTML = days + "d " + hours + "h "
+  + minutes + "m " + seconds + "s ";
+
+  // If the count down is finished, write some text
+  if (distance < 0) {
+    clearInterval(x);
+    document.getElementById("demo").innerHTML = "EXPIRED";
+  }
+}, 1000);
+    }
+$("#datetimepicker").change(function() {
+    var x;
+    clearInterval();
+    document.getElementById("demo").innerHTML='';
+    document.getElementById("demoprev").innerHTML='Self-Destruct in T-Minus';
+    //alert($("#datetimepicker").val());
+    if($("#datetimepicker").val())
+    {
+        //alert("efhwbefj");
+        //clearInterval(x);
+        var date=new Date($("#datetimepicker").val());
+        //alert(date);
+        //alert($("#datetimepicker").val().getTime());
+        countDownDate = date.getTime();
+        setup();
+        //alert("Hereeeee");
+
+// Update the count down every 1 second
+//clearInterval(x);
+
+    }
+    });
+});
+</script>
+</html>
